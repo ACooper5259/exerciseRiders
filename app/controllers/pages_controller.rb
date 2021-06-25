@@ -1,7 +1,9 @@
 class PagesController < ApplicationController
-  # before_action :authenticate_user!
-  
-  def index
+  # root path for react application
+  def index 
+  end
+  # root path for app
+  def welcome
   end
 
 end
