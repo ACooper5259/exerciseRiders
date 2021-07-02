@@ -10,10 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_27_221108) do
+ActiveRecord::Schema.define(version: 2021_07_02_003033) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "lessons", force: :cascade do |t|
+    t.date "date", null: false
+    t.time "start", null: false
+    t.time "end"
+    t.integer "spots"
+    t.boolean "confirmed"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "lessons_users", id: false, force: :cascade do |t|
+    t.bigint "lesson_id", null: false
+    t.bigint "user_id", null: false
+    t.index ["lesson_id", "user_id"], name: "index_lessons_users_on_lesson_id_and_user_id"
+    t.index ["lesson_id"], name: "index_lessons_users_on_lesson_id"
+    t.index ["user_id", "lesson_id"], name: "index_lessons_users_on_user_id_and_lesson_id"
+    t.index ["user_id"], name: "index_lessons_users_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
